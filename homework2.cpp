@@ -1,3 +1,8 @@
+/*
+Р”РѕРјР°С€РЅСЏСЏ СЂР°Р±РѕС‚Р° в„–2
+РђР»РµРєСЃРµР№ РЁР°РїСЂР°РЅ 
+Р“СЂСѓРїРїР°: РРЈ8-14
+*/
 #include <windows.h>
 #include <iostream>
 #include <stdio.h>
@@ -25,7 +30,7 @@ int WINAPI WinMain(HINSTANCE hInst,
 	LPSTR pCommandLine,
 	int nCommandShow)
 {
-	TCHAR className[] = "Мой класс";
+	TCHAR className[] = "ГЊГ®Г© ГЄГ«Г Г±Г±";
 	HWND hWindow;
 	MSG message;
 	WNDCLASSEX windowClass;
@@ -45,12 +50,12 @@ int WINAPI WinMain(HINSTANCE hInst,
 
 	if (!RegisterClassEx(&windowClass))
 	{
-		MessageBox(NULL, "Не получилось зарегистрировать класс!", "Ошибка", MB_OK);
+		MessageBox(NULL, "ГЌГҐ ГЇГ®Г«ГіГ·ГЁГ«Г®Г±Гј Г§Г Г°ГҐГЈГЁГ±ГІГ°ГЁГ°Г®ГўГ ГІГј ГЄГ«Г Г±Г±!", "ГЋГёГЁГЎГЄГ ", MB_OK);
 		return NULL;
 	}
 
 	hWindow = CreateWindow(className,
-		"Программа шифрования и расшифрования данных",
+		"ГЏГ°Г®ГЈГ°Г Г¬Г¬Г  ГёГЁГґГ°Г®ГўГ Г­ГЁГї ГЁ Г°Г Г±ГёГЁГґГ°Г®ГўГ Г­ГЁГї Г¤Г Г­Г­Г»Гµ",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		NULL,
@@ -64,18 +69,18 @@ int WINAPI WinMain(HINSTANCE hInst,
 	HMENU hmenu1 = CreateMenu();
 	HMENU hPopupmenu1 = CreatePopupMenu();
 
-	AppendMenu(hmenu1, MF_STRING | MF_POPUP, (UINT)hPopupmenu1, "&Файл");
+	AppendMenu(hmenu1, MF_STRING | MF_POPUP, (UINT)hPopupmenu1, "&Г”Г Г©Г«");
 	{
-		AppendMenu(hPopupmenu1, MF_STRING, 1111, TEXT("Сохранить зашифрованный текст"));
-		AppendMenu(hPopupmenu1, MF_STRING, 1112, "Открыть расшифрованный текст");
-		AppendMenu(hPopupmenu1, MF_STRING, 1113, "Выход");
+		AppendMenu(hPopupmenu1, MF_STRING, 1111, TEXT("Г‘Г®ГµГ°Г Г­ГЁГІГј Г§Г ГёГЁГґГ°Г®ГўГ Г­Г­Г»Г© ГІГҐГЄГ±ГІ"));
+		AppendMenu(hPopupmenu1, MF_STRING, 1112, "ГЋГІГЄГ°Г»ГІГј Г°Г Г±ГёГЁГґГ°Г®ГўГ Г­Г­Г»Г© ГІГҐГЄГ±ГІ");
+		AppendMenu(hPopupmenu1, MF_STRING, 1113, "Г‚Г»ГµГ®Г¤");
 	}
-	AppendMenu(hmenu1, MF_STRING, 1114, "&Помощь");
+	AppendMenu(hmenu1, MF_STRING, 1114, "&ГЏГ®Г¬Г®Г№Гј");
 
 
 	SetMenu(hWindow, hmenu1);
 	if (!hWindow) {
-		MessageBox(NULL, "Не получилось создать окно!", "Ошибка", MB_OK);
+		MessageBox(NULL, "ГЌГҐ ГЇГ®Г«ГіГ·ГЁГ«Г®Г±Гј Г±Г®Г§Г¤Г ГІГј Г®ГЄГ­Г®!", "ГЋГёГЁГЎГЄГ ", MB_OK);
 		return NULL;
 	}
 	ShowWindow(hWindow, nCommandShow);
@@ -109,7 +114,7 @@ PTCHAR scrambler(int size, int key, PTCHAR text)
 			if (x[i] == 0) x[i] = 127;
 		}
 		
-		// Циклический сдвиг вправо на shift бит
+		// Г–ГЁГЄГ«ГЁГ·ГҐГ±ГЄГЁГ© Г±Г¤ГўГЁГЈ ГўГЇГ°Г ГўГ® Г­Г  shift ГЎГЁГІ
 		for (int j = 0; j < shift; j++)
 		{
 			for (int i = 0; i < size; i++) y[i] = x[i];
@@ -212,17 +217,17 @@ LRESULT CALLBACK WindowProcess(HWND hWindow, UINT uMessage,
 		{
 		case 1111:
 			ofn.lStructSize = sizeof(OPENFILENAME);
-			ofn.hwndOwner = hWindow; // родительское окно 
-			ofn.lpstrFilter = "Шифрованные файлы (*.shf)\0*.shf\0Все файлы\0*.*\0"; // Маска (фильтр) для отображаемых файлов
-			ofn.lpstrFile = NameFile;  // Сюда будет записано полное имя файла
+			ofn.hwndOwner = hWindow; // Г°Г®Г¤ГЁГІГҐГ«ГјГ±ГЄГ®ГҐ Г®ГЄГ­Г® 
+			ofn.lpstrFilter = "ГГЁГґГ°Г®ГўГ Г­Г­Г»ГҐ ГґГ Г©Г«Г» (*.shf)\0*.shf\0Г‚Г±ГҐ ГґГ Г©Г«Г»\0*.*\0"; // ГЊГ Г±ГЄГ  (ГґГЁГ«ГјГІГ°) Г¤Г«Гї Г®ГІГ®ГЎГ°Г Г¦Г ГҐГ¬Г»Гµ ГґГ Г©Г«Г®Гў
+			ofn.lpstrFile = NameFile;  // Г‘ГѕГ¤Г  ГЎГіГ¤ГҐГІ Г§Г ГЇГЁГ±Г Г­Г® ГЇГ®Г«Г­Г®ГҐ ГЁГ¬Гї ГґГ Г©Г«Г 
 			ofn.nMaxFile = 255;
 			ofn.lpstrFileTitle = NULL;
 			ofn.nMaxFileTitle = 0;
 			ofn.lpstrInitialDir = NULL;
 			ofn.Flags = OFN_SHOWHELP | OFN_OVERWRITEPROMPT;
 			ofn.lpstrTitle = NULL;
-			ofn.lpstrDefExt = "shf"; // Строка расширение по умолчанию
-			if (GetSaveFileName(&ofn)) // Появляется окно "Сохранить", функция возвращает истинно, если нажата кнопка Ok
+			ofn.lpstrDefExt = "shf"; // Г‘ГІГ°Г®ГЄГ  Г°Г Г±ГёГЁГ°ГҐГ­ГЁГҐ ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
+			if (GetSaveFileName(&ofn)) // ГЏГ®ГїГўГ«ГїГҐГІГ±Гї Г®ГЄГ­Г® "Г‘Г®ГµГ°Г Г­ГЁГІГј", ГґГіГ­ГЄГ¶ГЁГї ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГЁГ±ГІГЁГ­Г­Г®, ГҐГ±Г«ГЁ Г­Г Г¦Г ГІГ  ГЄГ­Г®ГЇГЄГ  Ok
 			{
 				
 				if (DialogBox(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), hWindow, MyDialog) == IDOK)
@@ -230,7 +235,7 @@ LRESULT CALLBACK WindowProcess(HWND hWindow, UINT uMessage,
 					ofstream fout("C:\\cpp\\baumanclasses\\hw\\hw2\\hw2.shf", ios_base::app);
 					if (!fout.is_open())
 					{
-						MessageBox(hWindow, "Ошибка открытия файла.", "Сообщение об ошибке", MB_OK | MB_ICONHAND);
+						MessageBox(hWindow, "ГЋГёГЁГЎГЄГ  Г®ГІГЄГ°Г»ГІГЁГї ГґГ Г©Г«Г .", "Г‘Г®Г®ГЎГ№ГҐГ­ГЁГҐ Г®ГЎ Г®ГёГЁГЎГЄГҐ", MB_OK | MB_ICONHAND);
 						return TRUE;
 					}
 					else
@@ -240,10 +245,10 @@ LRESULT CALLBACK WindowProcess(HWND hWindow, UINT uMessage,
 					}
 				fout.close();
 				fflush(stdin);
-				MessageBox(hWindow, "Данные успешно сохранены.", "Сообщение", MB_OK | MB_ICONINFORMATION);
+				MessageBox(hWindow, "Г„Г Г­Г­Г»ГҐ ГіГ±ГЇГҐГёГ­Г® Г±Г®ГµГ°Г Г­ГҐГ­Г».", "Г‘Г®Г®ГЎГ№ГҐГ­ГЁГҐ", MB_OK | MB_ICONINFORMATION);
 				InvalidateRect(hWindow, 0, TRUE);
 				}
-				else MessageBox(hWindow, "Данные не сохранены. Ключ не введен!!", "Сообщение", MB_OK | MB_ICONHAND);
+				else MessageBox(hWindow, "Г„Г Г­Г­Г»ГҐ Г­ГҐ Г±Г®ГµГ°Г Г­ГҐГ­Г». ГЉГ«ГѕГ· Г­ГҐ ГўГўГҐГ¤ГҐГ­!!", "Г‘Г®Г®ГЎГ№ГҐГ­ГЁГҐ", MB_OK | MB_ICONHAND);
 			}
 			break;
 		
@@ -253,29 +258,29 @@ LRESULT CALLBACK WindowProcess(HWND hWindow, UINT uMessage,
 			hDeviceContext = BeginPaint(hWindow, &paintStruct);
 			ofn.lStructSize = sizeof(ofn);
 			ofn.hwndOwner = hWindow;
-			ofn.lpstrFile = NameFile; // Сюда будет записано имя файла
+			ofn.lpstrFile = NameFile; // Г‘ГѕГ¤Г  ГЎГіГ¤ГҐГІ Г§Г ГЇГЁГ±Г Г­Г® ГЁГ¬Гї ГґГ Г©Г«Г 
 									  // Set lpstrFile[0] to '\0' so that GetOpenFileName does not 
 									  // use the contents of szFile to initialize itself.
 			ofn.lpstrFile[0] = '\0';
 			ofn.nMaxFile = 255;
-			ofn.lpstrFilter = "Шифрованные файлы (*.shf)\0*.shf\0Все файлы\0*.*\0"; // Фильтр для отображения файлов
+			ofn.lpstrFilter = "ГГЁГґГ°Г®ГўГ Г­Г­Г»ГҐ ГґГ Г©Г«Г» (*.shf)\0*.shf\0Г‚Г±ГҐ ГґГ Г©Г«Г»\0*.*\0"; // Г”ГЁГ«ГјГІГ° Г¤Г«Гї Г®ГІГ®ГЎГ°Г Г¦ГҐГ­ГЁГї ГґГ Г©Г«Г®Гў
 			ofn.nFilterIndex = 0;
 			ofn.lpstrFileTitle = NULL;
 			ofn.nMaxFileTitle = 0;
 			ofn.lpstrInitialDir = NULL;
 			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-			ofn.lpstrDefExt = "shf"; // Строка расширение по умолчанию
+			ofn.lpstrDefExt = "shf"; // Г‘ГІГ°Г®ГЄГ  Г°Г Г±ГёГЁГ°ГҐГ­ГЁГҐ ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
 
-			if (GetOpenFileName(&ofn)) // Появляется окно "Открыть", функция возвращает истинно, если нажата кнопка Открыть
+			if (GetOpenFileName(&ofn)) // ГЏГ®ГїГўГ«ГїГҐГІГ±Гї Г®ГЄГ­Г® "ГЋГІГЄГ°Г»ГІГј", ГґГіГ­ГЄГ¶ГЁГї ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГЁГ±ГІГЁГ­Г­Г®, ГҐГ±Г«ГЁ Г­Г Г¦Г ГІГ  ГЄГ­Г®ГЇГЄГ  ГЋГІГЄГ°Г»ГІГј
 			{
-				// Отображаем окно для ввода ключа
+				// ГЋГІГ®ГЎГ°Г Г¦Г ГҐГ¬ Г®ГЄГ­Г® Г¤Г«Гї ГўГўГ®Г¤Г  ГЄГ«ГѕГ·Г 
 				if (DialogBox(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), hWindow, MyDialog) == IDOK)
 				{
 					setlocale(LC_CTYPE, "rus");
 					ifstream fin("C:\\cpp\\baumanclasses\\hw\\hw2\\hw2.shf");
 					if (!fin.is_open())
 					{
-						MessageBox(hWindow, "Ошибка открытия файла.", "Сообщение об ошибке", MB_OK | MB_ICONHAND);
+						MessageBox(hWindow, "ГЋГёГЁГЎГЄГ  Г®ГІГЄГ°Г»ГІГЁГї ГґГ Г©Г«Г .", "Г‘Г®Г®ГЎГ№ГҐГ­ГЁГҐ Г®ГЎ Г®ГёГЁГЎГЄГҐ", MB_OK | MB_ICONHAND);
 						return TRUE;
 					}
 					else
@@ -284,9 +289,9 @@ LRESULT CALLBACK WindowProcess(HWND hWindow, UINT uMessage,
 					}
 					fin.close();
 					fflush(stdin);
-					InvalidateRect(hWindow, 0, TRUE); // Перерисовка окна
+					InvalidateRect(hWindow, 0, TRUE); // ГЏГҐГ°ГҐГ°ГЁГ±Г®ГўГЄГ  Г®ГЄГ­Г 
 				}
-				else MessageBox(hWindow, "Данные не прочитаны. Ключ не введен!!", "Сообщение", MB_OK | MB_ICONHAND);
+				else MessageBox(hWindow, "Г„Г Г­Г­Г»ГҐ Г­ГҐ ГЇГ°Г®Г·ГЁГІГ Г­Г». ГЉГ«ГѕГ· Г­ГҐ ГўГўГҐГ¤ГҐГ­!!", "Г‘Г®Г®ГЎГ№ГҐГ­ГЁГҐ", MB_OK | MB_ICONHAND);
 			}
 
 			break;
@@ -295,7 +300,7 @@ LRESULT CALLBACK WindowProcess(HWND hWindow, UINT uMessage,
 			DestroyWindow(hWindow);
 			break;
 		case 1114:
-			MessageBox(hWindow, "Данная программа предназначена для шифрования и расшифрования данных. \n Необходимо ввести сообщение, сохранить его зашифрованную копию с вводом пароля. \n Для расшифровки сообщения необходимо открыть зашифрованный файл .shf и ввести пароль. \n Приятного пользования!", "Сообщение", MB_OK | MB_ICONINFORMATION);
+			MessageBox(hWindow, "Г„Г Г­Г­Г Гї ГЇГ°Г®ГЈГ°Г Г¬Г¬Г  ГЇГ°ГҐГ¤Г­Г Г§Г­Г Г·ГҐГ­Г  Г¤Г«Гї ГёГЁГґГ°Г®ГўГ Г­ГЁГї ГЁ Г°Г Г±ГёГЁГґГ°Г®ГўГ Г­ГЁГї Г¤Г Г­Г­Г»Гµ. \n ГЌГҐГ®ГЎГµГ®Г¤ГЁГ¬Г® ГўГўГҐГ±ГІГЁ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ, Г±Г®ГµГ°Г Г­ГЁГІГј ГҐГЈГ® Г§Г ГёГЁГґГ°Г®ГўГ Г­Г­ГіГѕ ГЄГ®ГЇГЁГѕ Г± ГўГўГ®Г¤Г®Г¬ ГЇГ Г°Г®Г«Гї. \n Г„Г«Гї Г°Г Г±ГёГЁГґГ°Г®ГўГЄГЁ Г±Г®Г®ГЎГ№ГҐГ­ГЁГї Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г® Г®ГІГЄГ°Г»ГІГј Г§Г ГёГЁГґГ°Г®ГўГ Г­Г­Г»Г© ГґГ Г©Г« .shf ГЁ ГўГўГҐГ±ГІГЁ ГЇГ Г°Г®Г«Гј. \n ГЏГ°ГЁГїГІГ­Г®ГЈГ® ГЇГ®Г«ГјГ§Г®ГўГ Г­ГЁГї!", "Г‘Г®Г®ГЎГ№ГҐГ­ГЁГҐ", MB_OK | MB_ICONINFORMATION);
 			break;
 		}
 
@@ -322,20 +327,20 @@ INT_PTR CALLBACK MyDialog(HWND hDlg, UINT uMessage, WPARAM wParameter, LPARAM lP
 	case WM_COMMAND:
 		if (LOWORD(wParameter) == IDOK || LOWORD(wParameter) == IDCANCEL)
 		{
-			if (LOWORD(wParameter) == IDOK) // Читаем секретный ключ из текстового поля
+			if (LOWORD(wParameter) == IDOK) // Г—ГЁГІГ ГҐГ¬ Г±ГҐГЄГ°ГҐГІГ­Г»Г© ГЄГ«ГѕГ· ГЁГ§ ГІГҐГЄГ±ГІГ®ГўГ®ГЈГ® ГЇГ®Г«Гї
 			{
 				char Str[32];
-				SendDlgItemMessage(hDlg, IDC_EDIT1, WM_GETTEXT, 31, (LPARAM)Str); // Прочитали текст из текстового поля и записали в струку Str
-																  // Читаем данные из строки
-				if (sscanf_s(Str, "%d", &key) < 1) // Целое значение не прочитано из строки
+				SendDlgItemMessage(hDlg, IDC_EDIT1, WM_GETTEXT, 31, (LPARAM)Str); // ГЏГ°Г®Г·ГЁГІГ Г«ГЁ ГІГҐГЄГ±ГІ ГЁГ§ ГІГҐГЄГ±ГІГ®ГўГ®ГЈГ® ГЇГ®Г«Гї ГЁ Г§Г ГЇГЁГ±Г Г«ГЁ Гў Г±ГІГ°ГіГЄГі Str
+																  // Г—ГЁГІГ ГҐГ¬ Г¤Г Г­Г­Г»ГҐ ГЁГ§ Г±ГІГ°Г®ГЄГЁ
+				if (sscanf_s(Str, "%d", &key) < 1) // Г–ГҐГ«Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ Г­ГҐ ГЇГ°Г®Г·ГЁГІГ Г­Г® ГЁГ§ Г±ГІГ°Г®ГЄГЁ
 				{
-					MessageBox(hDlg, "Неверный формат ключа. Ключ должен быть целым числом", "Сообщение о неверном формате ключа", MB_OK | MB_ICONHAND);
-					return (INT_PTR)TRUE; // Выход без закрытия диалогового окна
+					MessageBox(hDlg, "ГЌГҐГўГҐГ°Г­Г»Г© ГґГ®Г°Г¬Г ГІ ГЄГ«ГѕГ·Г . ГЉГ«ГѕГ· Г¤Г®Г«Г¦ГҐГ­ ГЎГ»ГІГј Г¶ГҐГ«Г»Г¬ Г·ГЁГ±Г«Г®Г¬", "Г‘Г®Г®ГЎГ№ГҐГ­ГЁГҐ Г® Г­ГҐГўГҐГ°Г­Г®Г¬ ГґГ®Г°Г¬Г ГІГҐ ГЄГ«ГѕГ·Г ", MB_OK | MB_ICONHAND);
+					return (INT_PTR)TRUE; // Г‚Г»ГµГ®Г¤ ГЎГҐГ§ Г§Г ГЄГ°Г»ГІГЁГї Г¤ГЁГ Г«Г®ГЈГ®ГўГ®ГЈГ® Г®ГЄГ­Г 
 
 				}
 
 			}
-			EndDialog(hDlg, LOWORD(wParameter)); // Закрытие диалогового окна
+			EndDialog(hDlg, LOWORD(wParameter)); // Г‡Г ГЄГ°Г»ГІГЁГҐ Г¤ГЁГ Г«Г®ГЈГ®ГўГ®ГЈГ® Г®ГЄГ­Г 
 			return (INT_PTR)TRUE;
 		}
 		break;
